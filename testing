@@ -1,0 +1,54 @@
+
+#include <iostream>
+#include <cmath>
+bool PerfectSquare(int n) {
+    int sqrtN = sqrt(n);
+    return sqrtN * sqrtN == n;
+}
+bool Fibonacci(int n) {
+    return PerfectSquare(5 * n * n + 4) || PerfectSquare(5 * n * n - 4);
+}
+void Spaces(int spaces) {
+    for (int i = 0; i < spaces; ++i) {
+        std::cout << " ";
+    }
+}
+void Stars(int stars) {
+    for (int i = 0; i < stars; ++i) {
+        std::cout << "*";
+    }
+}
+
+int main() {
+    int num;
+    std::cout << "Enter a number: ";
+    std::cin >> num;
+    if (!isFibonacci(num)) {
+        std::cout << num << " is not part of the Fibonacci sequence.\n";
+        return 1;
+    }
+
+    int a = 0, b = 1, c = 0, sum = 0;
+    while (c <= num) {
+        sum += c;
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    int spaces = sum / 2;
+    int stars = 1;
+    for (int i = 0; i < sum; ++i) {
+        Spaces(spaces);
+        Stars(stars);
+        std::cout << std::endl;
+        if (i < sum / 2) {
+            spaces--;
+            stars += 2;
+        } else {
+            spaces++;
+            stars -= 2;
+        }
+    }
+
+    return 0;
+}
